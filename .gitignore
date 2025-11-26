@@ -31,7 +31,6 @@ db.sqlite3
 *.log
 
 # Static + media (collected or user-uploaded)
-static/
 staticfiles/
 media/
 media_root/

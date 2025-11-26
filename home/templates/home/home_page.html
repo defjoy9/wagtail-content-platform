@@ -1,21 +1,24 @@
+<!-- home/home_page.html -->
 {% extends "base.html" %}
-{% load static %}
-
-{% block body_class %}template-homepage{% endblock %}
-
-{% block extra_css %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
-{% endblock extra_css %}
+{% load wagtailcore_tags %}
 
 {% block content %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
-
-{% endblock content %}
+    <!-- ===== HERO ===== -->
+    <section class="hero container">
+        <h1 class="hero-title">
+            Lorem <span class="accent">Ipsum</span>
+        </h1>
+        <p class="hero-subtitle">
+            Cras sit amet turpis et felis lobortis tristique nec vel diam. Nulla sed dui commodo, ullamcorper dolor eleifend, fringilla nisi. Sed vestibulum molestie arcu, quis maximus ex pulvinar ut. Praesent scelerisque tristique mi, vitae hendrerit erat. Vestibulum ut ante ultrices, tempor eros vel, varius arcu.
+        </p>
+        <p class="hero-subtitle">
+            Vivamus convallis pharetra enim non lobortis. Aenean ultricies nibh sit amet ante semper suscipit. Sed odio erat, iaculis vitae velit ac, gravida vestibulum enim. Morbi ullamcorper justo fringilla dui posuere posuere. Nam ac elementum risus, et blandit est. Phasellus placerat nulla arcu, eu euismod nisi aliquet id. Nullam euismod vel dolor eget varius. 
+        </p>
+        <p class="hero-subtitle">
+            Donec facilisis tellus justo, a bibendum nibh pulvinar nec. Integer ultricies luctus ipsum, sit amet viverra justo condimentum a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dapibus sollicitudin massa, a egestas eros aliquam vitae. In hac habitasse platea dictumst. Morbi posuere tellus nec felis commodo vulputate. Morbi dignissim tincidunt nisl a pulvinar. Etiam ornare lorem vel est venenatis, eget feugiat mauris elementum. 
+        </p>
+        <p class="hero-subtitle">
+            Nulla diam urna, fermentum in tincidunt eget, interdum eleifend dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis commodo diam id magna malesuada placerat. Pellentesque id mattis leo. Nulla ipsum risus, varius vel turpis sit amet, consectetur laoreet ligula. Vestibulum in ipsum consectetur mi sollicitudin dictum. Nunc vitae odio sed ipsum consequat laoreet. Sed nec pharetra eros, eu tristique urna. Nulla vulputate, dolor at congue posuere, quam lacus imperdiet ligula, in congue ante nunc sit amet metus. Fusce mollis, lorem eu tempor egestas, tortor arcu commodo erat, ac auctor nisl lacus quis dolor. 
+        </p>
+    </section>
+{% endblock %}
