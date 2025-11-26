@@ -1,0 +1,84 @@
+# ----------------------------------------------------
+# Python / Virtualenv
+# ----------------------------------------------------
+.venv/
+_env/
+venv/
+env/
+pip-wheel-metadata/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# ----------------------------------------------------
+# Environment & Secrets
+# ----------------------------------------------------
+.env
+.env.local
+*.env
+.env.*
+!.env.example
+
+# ----------------------------------------------------
+# Django / Wagtail
+# ----------------------------------------------------
+# SQLite database (local dev only)
+db.sqlite3
+
+# Django logs
+*.log
+
+# Static + media (collected or user-uploaded)
+static/
+staticfiles/
+media/
+media_root/
+STATIC_ROOT/
+MEDIA_ROOT/
+
+# Wagtail cache files
+wagtailcache/
+cache/
+*.cache
+
+# ----------------------------------------------------
+# IDE / Editor junk
+# ----------------------------------------------------
+.vscode/
+.idea/
+.spyproject/
+# ----------------------------------------------------
+# OS junk
+# ----------------------------------------------------
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
+
+# ----------------------------------------------------
+# Docker
+# ----------------------------------------------------
+# Avoid committing build artifacts or large containers
+docker-compose.override.yml
+docker/data/
+docker/volumes/
+docker/logs/
+*.tar
+
+# ----------------------------------------------------
+# Python packaging
+# ----------------------------------------------------
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ----------------------------------------------------
+# Coverage / Testing
+# ----------------------------------------------------
+.coverage
+htmlcov/
+pytest_cache/
+.tox/
