@@ -44,8 +44,8 @@
             <nav class="nav-links">
                 <a href="">Blog</a>
                 <a href="{% page_url 'about' %}">About</a>
-                <a href="">Login</a>
-                <a href="">Sign Up</a>
+                <a href="{% url 'accounts:login' %}">Login</a>
+                <a href="{% url 'accounts:signup' %}">Sign Up</a>
             </nav>
         </div>
     </header>

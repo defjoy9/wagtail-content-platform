@@ -31,6 +31,7 @@ BASE_DIR = PROJECT_DIR.parent
 INSTALLED_APPS = [
     "home",
     "search",
+    "accounts",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
