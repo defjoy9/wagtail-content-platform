@@ -4,9 +4,11 @@ from django.utils.text import slugify
 from wagtail.models import Page, Site
 
 from home.models import HomePage, AboutPage
+from blog.models import BlogIndexPage
 
 PAGES = {
     "about": AboutPage,
+    "blog": BlogIndexPage,
 }
 
 class Command(BaseCommand):
