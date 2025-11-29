@@ -1,12 +1,35 @@
 <!-- accounts/login.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load static %}
 
 {% block content %}
-    <!-- ===== HERO ===== -->
-    <section class="hero container">
-        <h1 class="hero-title">
-            Log <span class="accent">In</span>
-        </h1>
-    </section>
+<div class="container mt-5" style="max-width: 500px;">
+    <h2 class="mb-4 text-center">Login</h2>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                Invalid username or password.
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            {{ form.password }}
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <a href="{% url 'accounts:signup' %}">Don't have an account? Sign up</a>
+    </div>
+</div>
 {% endblock %}

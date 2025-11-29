@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="mb-4 text-center">Your Profile</h3>
+
+            <div class="mb-3">
+                <strong>Username:</strong> {{ user.username }}
+            </div>
+
+            <div class="mb-3">
+                <strong>Email:</strong> {{ user.email|default:"Not provided" }}
+            </div>
+
+            <div class="mb-3">
+                <strong>First name:</strong> {{ user.first_name|default:"-" }}
+            </div>
+
+            <div class="mb-3">
+                <strong>Last name:</strong> {{ user.last_name|default:"-" }}
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+                <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                </form>
+                <a href="/" class="btn btn-primary">Return Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

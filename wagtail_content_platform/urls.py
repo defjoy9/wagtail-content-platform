@@ -16,7 +16,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
 
     # Public accounts system
-    path("", include("accounts.urls")),
+    path("accounts/", include("accounts.urls")),
 
     # Wagtail FRONTEND (must always be last)
     path("", include(wagtail_urls)),
