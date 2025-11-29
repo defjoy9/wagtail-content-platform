@@ -22,6 +22,9 @@ urlpatterns = [
     # Staff dashboard
     path("dashboard/", include("dashboard.urls")),
     
+    # REST API
+    path("api/", include("blog.api_urls")),
+    
     # SEO
     path("sitemap.xml", sitemap),
 

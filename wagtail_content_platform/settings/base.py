@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "search",
     "accounts",
     "dashboard",
+    "rest_framework",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.sitemaps",
