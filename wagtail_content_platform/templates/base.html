@@ -48,10 +48,8 @@
             <nav class="nav-links">
                 <a href="{% page_url 'blog' %}">Blog</a>
                 <a href="{% page_url 'about' %}">About</a>
+                <a href="{% url 'dashboard:dashboard' %}">Dashboard</a>
                 {% if user.is_authenticated %}
-                    {% if user.is_staff %}
-                        <a href="{% url 'dashboard:dashboard' %}">Dashboard</a>
-                    {% endif %}
                     <a href="{% url 'accounts:profile' %}">
                         {% if user.get_full_name %}
                             {{ user.get_full_name }}

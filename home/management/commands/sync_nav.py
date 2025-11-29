@@ -25,7 +25,8 @@ class Command(BaseCommand):
             existing = home.get_children().filter(slug=wagtail_slug).first()
 
             if not existing:
-                page = model(title=slug.replace("_", " ").title(), slug=wagtail_slug)
+                title = slug.replace("_", " ").title()
+                page = model(title=title, slug=wagtail_slug)
                 home.add_child(instance=page)
                 page.save_revision().publish()
                 self.stdout.write(self.style.SUCCESS(f"Created: {slug}"))

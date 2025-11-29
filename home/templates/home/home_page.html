@@ -1,24 +1,148 @@
 <!-- home/home_page.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailuserbar nav_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block content %}
     <!-- ===== HERO ===== -->
     <section class="hero container">
         <h1 class="hero-title">
-            Lorem <span class="accent">Ipsum</span>
+            Wagtail <span class="accent">Content Platform</span>
         </h1>
         <p class="hero-subtitle">
-            Cras sit amet turpis et felis lobortis tristique nec vel diam. Nulla sed dui commodo, ullamcorper dolor eleifend, fringilla nisi. Sed vestibulum molestie arcu, quis maximus ex pulvinar ut. Praesent scelerisque tristique mi, vitae hendrerit erat. Vestibulum ut ante ultrices, tempor eros vel, varius arcu.
+            Modern CMS for technical publishing, documentation, and multi-page content delivery.
         </p>
-        <p class="hero-subtitle">
-            Vivamus convallis pharetra enim non lobortis. Aenean ultricies nibh sit amet ante semper suscipit. Sed odio erat, iaculis vitae velit ac, gravida vestibulum enim. Morbi ullamcorper justo fringilla dui posuere posuere. Nam ac elementum risus, et blandit est. Phasellus placerat nulla arcu, eu euismod nisi aliquet id. Nullam euismod vel dolor eget varius. 
+        <p class="hero-description">
+            Production-ready platform demonstrating Django/Wagtail expertise, RESTful API design, user authentication, administrative dashboards, and containerized deployment.
         </p>
-        <p class="hero-subtitle">
-            Donec facilisis tellus justo, a bibendum nibh pulvinar nec. Integer ultricies luctus ipsum, sit amet viverra justo condimentum a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dapibus sollicitudin massa, a egestas eros aliquam vitae. In hac habitasse platea dictumst. Morbi posuere tellus nec felis commodo vulputate. Morbi dignissim tincidunt nisl a pulvinar. Etiam ornare lorem vel est venenatis, eget feugiat mauris elementum. 
-        </p>
-        <p class="hero-subtitle">
-            Nulla diam urna, fermentum in tincidunt eget, interdum eleifend dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis commodo diam id magna malesuada placerat. Pellentesque id mattis leo. Nulla ipsum risus, varius vel turpis sit amet, consectetur laoreet ligula. Vestibulum in ipsum consectetur mi sollicitudin dictum. Nunc vitae odio sed ipsum consequat laoreet. Sed nec pharetra eros, eu tristique urna. Nulla vulputate, dolor at congue posuere, quam lacus imperdiet ligula, in congue ante nunc sit amet metus. Fusce mollis, lorem eu tempor egestas, tortor arcu commodo erat, ac auctor nisl lacus quis dolor. 
-        </p>
+        
+        <div class="hero-actions">
+            <a href="{% page_url 'blog' %}" class="btn btn-primary btn-lg">Browse Blog</a>
+            <a href="/api/posts/" class="btn btn-outline btn-lg">Try API</a>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES OVERVIEW ===== -->
+    <section class="features-grid container">
+        <h2 class="section-heading">Platform Capabilities</h2>
+        
+        <div class="feature-cards">
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Content Management</h3>
+                <p>Hierarchical page structure, custom page types, rich text editing, draft/publish workflows, and SEO optimization.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔌</div>
+                <h3>REST API</h3>
+                <p>Django REST Framework with JSON endpoints for content distribution. List and detail views with serialization.</p>
+                <a href="/api/posts/" class="feature-link">Try API →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Authentication</h3>
+                <p>User registration, login, role-based permissions, staff-only access control, and profile management.</p>
+                <a href="{% url 'accounts:signup' %}" class="feature-link">Sign Up →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Staff Dashboard</h3>
+                <p>Administrative interface with content statistics, time-series data, recent activity, and publishing tools.</p>
+                {% if user.is_staff %}
+                    <a href="{% url 'dashboard:dashboard' %}" class="feature-link">Dashboard →</a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="feature-link">Log In →</a>
+                {% endif %}
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>SEO & Publishing</h3>
+                <p>Meta tags, sitemap generation, robots.txt, canonical URLs, and social media preview support.</p>
+                <a href="/sitemap.xml" class="feature-link">Sitemap →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🐳</div>
+                <h3>DevOps Ready</h3>
+                <p>Docker containerization, nginx reverse proxy, PostgreSQL database, environment-based configuration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ARCHITECTURE ===== -->
+    <section class="architecture-section container">
+        <h2 class="section-heading">Technical Overview</h2>
+        
+        <div class="architecture-grid">
+            <div class="arch-block">
+                <h3>Backend Framework</h3>
+                <ul>
+                    <li>Django 5.2 with ORM, authentication, middleware</li>
+                    <li>Wagtail CMS with hierarchical page models</li>
+                    <li>Django REST Framework for API endpoints</li>
+                </ul>
+            </div>
+            
+            <div class="arch-block">
+                <h3>Database & Storage</h3>
+                <ul>
+                    <li>PostgreSQL with Django ORM</li>
+                    <li>Optimized queries with select_related</li>
+                    <li>Migration-based schema management</li>
+                </ul>
+            </div>
+            
+            <div class="arch-block">
+                <h3>Infrastructure</h3>
+                <ul>
+                    <li>Docker containerization</li>
+                    <li>nginx + gunicorn WSGI</li>
+                    <li>Environment-based settings (dev/prod)</li>
+                </ul>
+            </div>
+            
+            <div class="arch-block">
+                <h3>Features</h3>
+                <ul>
+                    <li>Custom page models with SEO fields</li>
+                    <li>Role-based access control</li>
+                    <li>REST API with serializers</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TECHNOLOGY STACK ===== -->
+    <section class="tech-stack-section container">
+        <h2 class="section-heading">Built With</h2>
+        <div class="tech-badges">
+            <span class="tech-badge">Django 5.2</span>
+            <span class="tech-badge">Wagtail CMS</span>
+            <span class="tech-badge">PostgreSQL</span>
+            <span class="tech-badge">Django REST Framework</span>
+            <span class="tech-badge">Docker</span>
+            <span class="tech-badge">nginx</span>
+            <span class="tech-badge">gunicorn</span>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-final container">
+        <h2>Explore the Platform</h2>
+        <p>A comprehensive demonstration of backend engineering capabilities in a production-ready CMS application.</p>
+        <div class="cta-buttons">
+            <a href="{% page_url 'blog' %}" class="btn btn-primary btn-lg">Read Blog</a>
+            <a href="/api/posts/" class="btn btn-secondary btn-lg">API Docs</a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'accounts:signup' %}" class="btn btn-outline btn-lg">Get Started</a>
+            {% endif %}
+        </div>
     </section>
 {% endblock %}
