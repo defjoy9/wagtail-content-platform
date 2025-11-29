@@ -3,32 +3,32 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5" style="max-width: 500px;">
-    <h2 class="mb-4 text-center">Login</h2>
+<div class="container" style="max-width: 500px; margin-top: 4rem;">
+    <h2 class="mb-xl text-center">Login</h2>
 
     <form method="post" novalidate>
         {% csrf_token %}
 
         {% if form.errors %}
-            <div class="alert alert-danger">
+            <div class="card" style="background: rgba(255, 59, 48, 0.1); border-color: #ff3b30; padding: var(--space-lg); margin-bottom: var(--space-xl); color: #ff3b30;">
                 Invalid username or password.
             </div>
         {% endif %}
 
-        <div class="mb-3">
-            <label class="form-label">Username</label>
+        <div class="form-group">
+            <label>Username</label>
             {{ form.username }}
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Password</label>
+        <div class="form-group">
+            <label>Password</label>
             {{ form.password }}
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: var(--space-lg);">Login</button>
     </form>
 
-    <div class="text-center mt-3">
+    <div class="text-center" style="margin-top: var(--space-xl);">
         <a href="{% url 'accounts:signup' %}">Don't have an account? Sign up</a>
     </div>
 </div>

@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container blog-index">
+<div class="container blog-index mt-xl">
 
     <h1 class="blog-index-title">{{ page.title }}</h1>
 
@@ -34,7 +34,7 @@
                     {{ post.body|richtext|truncatewords:30 }}
                 </p>
 
-                <a href="{{ post.url }}" class="card-readmore">Read →</a>
+                <a href="{{ post.url }}" class="card-readmore">Read</a>
             </div>
         </article>
         {% endfor %}
@@ -47,7 +47,7 @@
     <nav class="pagination-wrapper">
         <ul class="pagination">
             {% if posts.has_previous %}
-            <li><a href="?page={{ posts.previous_page_number }}">← Prev</a></li>
+            <li><a href="?page={{ posts.previous_page_number }}">Prev</a></li>
             {% else %}
             <li class="disabled">← Prev</li>
             {% endif %}
@@ -59,7 +59,7 @@
             {% endfor %}
 
             {% if posts.has_next %}
-            <li><a href="?page={{ posts.next_page_number }}">Next →</a></li>
+            <li><a href="?page={{ posts.next_page_number }}">Next</a></li>
             {% else %}
             <li class="disabled">Next →</li>
             {% endif %}

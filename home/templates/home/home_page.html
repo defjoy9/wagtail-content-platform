@@ -40,14 +40,14 @@
                 <div class="feature-icon">🔌</div>
                 <h3>REST API</h3>
                 <p>Django REST Framework with JSON endpoints for content distribution. List and detail views with serialization.</p>
-                <a href="/api/posts/" class="feature-link">Try API →</a>
+                <a href="/api/posts/" class="feature-link">Try API</a>
             </div>
             
             <div class="feature-card">
                 <div class="feature-icon">🔐</div>
                 <h3>Authentication</h3>
                 <p>User registration, login, role-based permissions, staff-only access control, and profile management.</p>
-                <a href="{% url 'accounts:signup' %}" class="feature-link">Sign Up →</a>
+                <a href="{% url 'accounts:signup' %}" class="feature-link">Sign Up</a>
             </div>
             
             <div class="feature-card">
@@ -55,9 +55,9 @@
                 <h3>Staff Dashboard</h3>
                 <p>Administrative interface with content statistics, time-series data, recent activity, and publishing tools.</p>
                 {% if user.is_staff %}
-                    <a href="{% url 'dashboard:dashboard' %}" class="feature-link">Dashboard →</a>
+                    <a href="{% url 'dashboard:dashboard' %}" class="feature-link">Dashboard</a>
                 {% else %}
-                    <a href="{% url 'accounts:login' %}" class="feature-link">Log In →</a>
+                    <a href="{% url 'accounts:login' %}" class="feature-link">Log In</a>
                 {% endif %}
             </div>
             
@@ -65,7 +65,7 @@
                 <div class="feature-icon">🔍</div>
                 <h3>SEO & Publishing</h3>
                 <p>Meta tags, sitemap generation, robots.txt, canonical URLs, and social media preview support.</p>
-                <a href="/sitemap.xml" class="feature-link">Sitemap →</a>
+                <a href="/sitemap.xml" class="feature-link">Sitemap</a>
             </div>
             
             <div class="feature-card">

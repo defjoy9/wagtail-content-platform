@@ -8,27 +8,27 @@
 {% endblock %}
 
 {% block content %}
-<div class="container blog-article">
+<div class="container blog-article mt-xl">
 
     <header class="article-header">
         <h1 class="article-title">{{ page.title }}</h1>
-        <p class="article-date">{{ page.date }}</p>
-
-        {% if page.feed_image %}
-            {% image page.feed_image fill-1200x500 as hero %}
-            <img src="{{ hero.url }}" class="article-hero" alt="">
-        {% endif %}
+        <div class="article-meta">
+            <time class="article-date">{{ page.date }}</time>
+        </div>
     </header>
 
-    <article class="article-body cyber-frame">
-        <div class="rich-text">
-            {{ page.body|richtext }}
-        </div>
-    </article>
-
-    <div class="article-nav">
-        <a href="{{ page.get_parent.url }}" class="back-link">← Back to Blog</a>
+    {% if page.feed_image %}
+    <div class="article-hero">
+        {% image page.feed_image fill-1200x500 as hero %}
+        <img src="{{ hero.url }}" alt="{{ page.title }}">
     </div>
+    {% endif %}
+
+    <div class="rich-text">
+        {{ page.body|richtext }}
+    </div>
+
+    <a href="{{ page.get_parent.url }}" class="back-link">Back to Blog</a>
 
 </div>
 {% endblock %}

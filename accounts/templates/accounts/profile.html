@@ -2,36 +2,38 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5" style="max-width: 700px;">
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h3 class="mb-4 text-center">Your Profile</h3>
+<div class="container" style="max-width: 700px; margin-top: 4rem;">
+    <div class="card">
+        <h3 class="mb-xl text-center">Your Profile</h3>
 
-            <div class="mb-3">
-                <strong>Username:</strong> {{ user.username }}
-            </div>
+        <div style="margin-bottom: var(--space-lg);">
+            <strong style="color: var(--text-primary);">Username:</strong> 
+            <span style="color: var(--text-secondary);">{{ user.username }}</span>
+        </div>
 
-            <div class="mb-3">
-                <strong>Email:</strong> {{ user.email|default:"Not provided" }}
-            </div>
+        <div style="margin-bottom: var(--space-lg);">
+            <strong style="color: var(--text-primary);">Email:</strong> 
+            <span style="color: var(--text-secondary);">{{ user.email|default:"Not provided" }}</span>
+        </div>
 
-            <div class="mb-3">
-                <strong>First name:</strong> {{ user.first_name|default:"-" }}
-            </div>
+        <div style="margin-bottom: var(--space-lg);">
+            <strong style="color: var(--text-primary);">First name:</strong> 
+            <span style="color: var(--text-secondary);">{{ user.first_name|default:"-" }}</span>
+        </div>
 
-            <div class="mb-3">
-                <strong>Last name:</strong> {{ user.last_name|default:"-" }}
-            </div>
+        <div style="margin-bottom: var(--space-xl);">
+            <strong style="color: var(--text-primary);">Last name:</strong> 
+            <span style="color: var(--text-secondary);">{{ user.last_name|default:"-" }}</span>
+        </div>
 
-            <hr>
+        <hr style="border: none; height: 1px; background: var(--border); margin: var(--space-xl) 0;">
 
-            <div class="d-flex justify-content-between">
-                <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger">Logout</button>
-                </form>
-                <a href="/" class="btn btn-primary">Return Home</a>
-            </div>
+        <div style="display: flex; justify-content: space-between; gap: var(--space-lg); flex-wrap: wrap;">
+            <form method="post" action="{% url 'accounts:logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline">Logout</button>
+            </form>
+            <a href="/" class="btn btn-primary">Return Home</a>
         </div>
     </div>
 </div>
