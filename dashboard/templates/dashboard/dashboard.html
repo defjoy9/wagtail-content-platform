@@ -1,0 +1,132 @@
+<!-- dashboard/templates/dashboard/dashboard.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Staff Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Staff Dashboard</h1>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Total Blog Posts</h5>
+                    <p class="display-4 fw-bold text-primary">{{ total_blog_posts }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Total Pages</h5>
+                    <p class="display-4 fw-bold text-success">{{ total_pages }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Total Users</h5>
+                    <p class="display-4 fw-bold text-info">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Posts This Month</h5>
+                    <p class="display-4 fw-bold text-warning">
+                        {% if posts_per_month %}
+                            {{ posts_per_month.0.count }}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Posts Per Month Chart -->
+    {% if posts_per_month %}
+    <div class="card shadow-sm mb-5">
+        <div class="card-header">
+            <h5 class="mb-0">Posts Per Month (Last 6 Months)</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Posts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in posts_per_month %}
+                    <tr>
+                        <td>{{ item.month|date:"F Y" }}</td>
+                        <td>{{ item.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Latest Blog Posts -->
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h5 class="mb-0">Latest Blog Posts</h5>
+        </div>
+        <div class="card-body">
+            {% if latest_posts %}
+            <div class="list-group list-group-flush">
+                {% for post in latest_posts %}
+                <a href="{{ post.url }}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">{{ post.title }}</h6>
+                        <small class="text-muted">{{ post.date|date:"M d, Y" }}</small>
+                    </div>
+                    {% if post.search_description %}
+                    <p class="mb-1 text-muted small">{{ post.search_description|truncatewords:20 }}</p>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted">No blog posts yet.</p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <a href="/admin/" class="btn btn-primary">Go to Wagtail Admin</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #e0e0e0;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}

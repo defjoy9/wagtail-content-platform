@@ -17,6 +17,9 @@ urlpatterns = [
 
     # Public accounts system
     path("accounts/", include("accounts.urls")),
+    
+    # Staff dashboard
+    path("dashboard/", include("dashboard.urls")),
 
     # Wagtail FRONTEND (must always be last)
     path("", include(wagtail_urls)),
