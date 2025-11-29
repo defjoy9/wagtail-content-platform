@@ -1,12 +1,71 @@
 <!-- blog/templates/blog/blog_index.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
 
 {% block content %}
-    <!-- ===== HERO ===== -->
-    <section class="hero container">
-        <h1 class="hero-title">
-            Blog <span class="accent">Posts</span>
-        </h1>
-    </section>
+<div class="container blog-index">
+
+    <h1 class="blog-index-title">{{ page.title }}</h1>
+
+    {% if posts %}
+    <div class="blog-grid">
+        {% for post in posts %}
+        <article class="blog-card">
+            <a href="{{ post.url }}" class="card-image-wrapper">
+                {% if post.feed_image %}
+                    {% image post.feed_image fill-600x400 as cardimg %}
+                    <img src="{{ cardimg.url }}" alt="{{ post.title }}">
+                {% endif %}
+            </a>
+
+            <div class="card-content">
+                <h2 class="card-title">
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                </h2>
+
+                <p class="card-date">{{ post.date }}</p>
+
+                <p class="card-excerpt">
+                    {{ post.body|richtext|truncatewords:30 }}
+                </p>
+
+                <a href="{{ post.url }}" class="card-readmore">Read →</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No blog posts found.</p>
+    {% endif %}
+
+    {% if posts.paginator.num_pages > 1 %}
+    <nav class="pagination-wrapper">
+        <ul class="pagination">
+            {% if posts.has_previous %}
+            <li><a href="?page={{ posts.previous_page_number }}">← Prev</a></li>
+            {% else %}
+            <li class="disabled">← Prev</li>
+            {% endif %}
+
+            {% for num in posts.paginator.page_range %}
+            <li class="{% if posts.number == num %}active{% endif %}">
+                <a href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endfor %}
+
+            {% if posts.has_next %}
+            <li><a href="?page={{ posts.next_page_number }}">Next →</a></li>
+            {% else %}
+            <li class="disabled">Next →</li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>
 {% endblock %}

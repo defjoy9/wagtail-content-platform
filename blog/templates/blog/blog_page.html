@@ -1,0 +1,34 @@
+<!-- blog/templates/blog/blog_page.html -->
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container blog-article">
+
+    <header class="article-header">
+        <h1 class="article-title">{{ page.title }}</h1>
+        <p class="article-date">{{ page.date }}</p>
+
+        {% if page.feed_image %}
+            {% image page.feed_image fill-1200x500 as hero %}
+            <img src="{{ hero.url }}" class="article-hero" alt="">
+        {% endif %}
+    </header>
+
+    <article class="article-body cyber-frame">
+        <div class="rich-text">
+            {{ page.body|richtext }}
+        </div>
+    </article>
+
+    <div class="article-nav">
+        <a href="{{ page.get_parent.url }}" class="back-link">← Back to Blog</a>
+    </div>
+
+</div>
+{% endblock %}
