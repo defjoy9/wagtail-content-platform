@@ -5,9 +5,10 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 from django.core.paginator import Paginator
+from home.models import SeoFields
 
 
-class BlogIndexPage(Page):
+class BlogIndexPage(SeoFields, Page):
     template = "blog/blog_index.html"
 
     subpage_types = ['blog.BlogPage']
@@ -32,7 +33,7 @@ class BlogIndexPage(Page):
         verbose_name = "Blog Index"
 
 
-class BlogPage(Page):
+class BlogPage(SeoFields, Page):
     date = models.DateField("Post date")
     body = RichTextField()
     feed_image = models.ForeignKey(

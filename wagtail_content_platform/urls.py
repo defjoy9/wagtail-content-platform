@@ -5,6 +5,7 @@ from django.contrib import admin
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail import urls as wagtail_urls
+from wagtail.contrib.sitemaps.views import sitemap
 from django.conf.urls.static import static
 from search import views as search_views
 
@@ -20,6 +21,9 @@ urlpatterns = [
     
     # Staff dashboard
     path("dashboard/", include("dashboard.urls")),
+    
+    # SEO
+    path("sitemap.xml", sitemap),
 
     # Wagtail FRONTEND (must always be last)
     path("", include(wagtail_urls)),
