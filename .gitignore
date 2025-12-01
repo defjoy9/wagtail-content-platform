@@ -26,6 +26,7 @@ __pycache__/
 # ----------------------------------------------------
 # SQLite database (local dev only)
 db.sqlite3
+dev.sqlite3
 
 # Django logs
 *.log
@@ -36,6 +37,8 @@ media/
 media_root/
 STATIC_ROOT/
 MEDIA_ROOT/
+/static/
+/staticfiles/
 
 # Wagtail cache files
 wagtailcache/

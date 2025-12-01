@@ -80,6 +80,7 @@ WSGI_APPLICATION = "wagtail_content_platform.wsgi.application"
 # -------------------------------------------------------------------
 
 STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
 MEDIA_URL = "/media/"
 
 # App static dirs
