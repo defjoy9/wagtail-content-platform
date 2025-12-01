@@ -1,19 +1,36 @@
 # wagtail_content_platform/settings/production.py
 from .base import *
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
-load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(BASE_DIR / ".env")
 
 DEBUG = False
-ALLOWED_HOSTS = ['defjoy.site']
+
+ALLOWED_HOSTS = [
+    "defjoy.site",
+    "www.defjoy.site",
+    "localhost",
+    "127.0.0.1",
+    "64.226.105.246",
+]
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-# Static
-STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+# -------------------------------------------------------------------
+# STATICFILES
+# -------------------------------------------------------------------
 
-# Database
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STORAGES["staticfiles"]["BACKEND"] = (
+    "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+)
+
+# -------------------------------------------------------------------
+# DATABASE (Postgres)
+# -------------------------------------------------------------------
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
@@ -25,18 +42,24 @@ DATABASES = {
     }
 }
 
-# Logging
+# -------------------------------------------------------------------
+# LOGGING
+# -------------------------------------------------------------------
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {"format": "{levelname} {asctime} {module} {message}", "style": "{"},
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
     },
     "handlers": {
         "file": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_DIR, "django.log"),
+            "filename": BASE_DIR / "django.log",
             "formatter": "verbose",
         },
     },

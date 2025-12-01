@@ -1,24 +1,19 @@
-# core wagtail_content_platform dev.py
+# wagtail_content_platform/dev.py
 from .base import *
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+load_dotenv(BASE_DIR / ".env")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-
-# SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ["*"]
 
-# PostgreSQL
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret-key")
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "NAME": BASE_DIR / "dev.sqlite3",
     }
 }
 
