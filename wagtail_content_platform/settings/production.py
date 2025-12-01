@@ -18,13 +18,22 @@ ALLOWED_HOSTS = [
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # -------------------------------------------------------------------
+# SECURITY
+# -------------------------------------------------------------------
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# -------------------------------------------------------------------
 # STATICFILES
 # -------------------------------------------------------------------
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES["staticfiles"]["BACKEND"] = (
-    "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+    "django.contrib.staticfiles.storage.StaticFilesStorage"
 )
 
 # -------------------------------------------------------------------
@@ -45,25 +54,19 @@ DATABASES = {
 # -------------------------------------------------------------------
 # LOGGING
 # -------------------------------------------------------------------
-
+LOGGING_CONFIG = None
 LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "{levelname} {asctime} {module} {message}",
-            "style": "{",
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
-    "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": BASE_DIR / "django.log",
-            "formatter": "verbose",
+    'loggers': {
+        '': {  # root logger
+            'handlers': ['console'],
+            'level': 'INFO',
         },
-    },
-    "loggers": {
-        "django": {"handlers": ["file"], "level": "INFO", "propagate": True},
     },
 }
