@@ -86,7 +86,7 @@ MEDIA_URL = "/media/"
 
 # App static dirs
 STATICFILES_DIRS = [
-    PROJECT_DIR / "static",
+    BASE_DIR / "wagtail_content_platform" / "static",
 ]
 
 MEDIA_ROOT = BASE_DIR / "media"
