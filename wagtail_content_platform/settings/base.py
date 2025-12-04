@@ -127,7 +127,7 @@ WAGTAILADMIN_BASE_URL = "https://defjoy.site"
 
 WAGTAILMARKDOWN = {
     "autodownload_fontawesome": False,
-    "allowed_tags": [],  # Disable bleach tag filtering (allow all markdown-generated HTML)
+    "allowed_tags": [],
     "allowed_attributes": {},
     "allowed_styles": [],
     "allowed_settings_mode": "extend",

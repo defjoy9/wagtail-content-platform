@@ -12,9 +12,24 @@ PAGES = {
 }
 
 class Command(BaseCommand):
+    """
+    Django management command to create required site pages.
+    
+    Creates About and Blog Index pages under HomePage if they don't exist.
+    Ensures consistent site structure for navigation.
+    
+    Usage:
+        python manage.py sync_nav
+    """
     help = "Automatically creates required pages if missing"
 
     def handle(self, *args, **options):
+        """
+        Create missing pages under HomePage.
+        
+        Checks for existing pages by slug and creates them if missing.
+        Publishes new pages immediately after creation.
+        """
         home = HomePage.objects.first()
         if not home:
             self.stderr.write("HomePage not found.")

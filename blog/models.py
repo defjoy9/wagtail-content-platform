@@ -9,11 +9,18 @@ from home.models import SeoFields
 
 
 class BlogIndexPage(SeoFields, Page):
+    """
+    Blog index page that lists all blog posts with pagination.
+    
+    Displays blog posts in reverse chronological order (newest first)
+    with 5 posts per page.
+    """
     template = "blog/blog_index.html"
 
     subpage_types = ['blog.BlogPage']
 
     def get_context(self, request, *args, **kwargs):
+        """Add paginated blog posts to template context."""
         context = super().get_context(request, *args, **kwargs)
         
         posts = (
@@ -34,6 +41,12 @@ class BlogIndexPage(SeoFields, Page):
 
 
 class BlogPage(SeoFields, Page):
+    """
+    Individual blog post page with markdown content.
+    
+    Supports markdown formatting with syntax-highlighted code blocks,
+    includes publication date and reading time estimate.
+    """
     date = models.DateField("Post date")
     body = MarkdownField()
 

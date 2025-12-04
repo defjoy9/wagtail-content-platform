@@ -11,7 +11,22 @@ from blog.models import BlogPage
 @staff_member_required
 def dashboard_view(request):
     """
-    Dashboard view for staff members showing site statistics and latest content.
+    Staff dashboard displaying site statistics and content overview.
+    
+    Shows:
+    - Total blog posts and pages
+    - Posts per month (last 6 months)
+    - Latest 5 blog posts
+    - Total user count
+    
+    Requires:
+        staff_member_required: User must be staff to access
+    
+    Args:
+        request: HttpRequest object
+    
+    Returns:
+        HttpResponse: Rendered dashboard template with statistics
     """
     # Total blog posts
     total_blog_posts = BlogPage.objects.live().count()

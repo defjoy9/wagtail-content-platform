@@ -508,6 +508,12 @@
     color: var(--accent);
 }
 
+.copy-button.error {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
 .copy-button svg {
     width: 14px;
     height: 14px;

@@ -33,10 +33,20 @@ class SeoFields(models.Model):
 
 
 class HomePage(SeoFields, Page):
+    """
+    Site homepage with SEO capabilities.
+    
+    Uses default template and inherits SEO fields from SeoFields.
+    """
     pass
 
 
 class AboutPage(SeoFields, Page):
+    """
+    About page with custom template.
+    
+    Displays information about the site or organization.
+    """
     template = "home/about.html"
 
     class Meta:

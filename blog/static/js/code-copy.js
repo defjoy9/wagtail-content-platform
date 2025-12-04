@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const text = code ? code.textContent : pre.textContent;
             
             navigator.clipboard.writeText(text).then(function() {
-                // Show success feedback
                 const originalHTML = copyButton.innerHTML;
                 copyButton.innerHTML = `
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,8 +59,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     copyButton.innerHTML = originalHTML;
                     copyButton.classList.remove('copied');
                 }, 2000);
-            }).catch(function(err) {
-                console.error('Failed to copy code: ', err);
+            }).catch(function() {
+                // Fallback: Show error state briefly
+                copyButton.classList.add('error');
+                setTimeout(function() {
+                    copyButton.classList.remove('error');
+                }, 1000);
             });
         });
     });
