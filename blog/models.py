@@ -36,13 +36,6 @@ class BlogIndexPage(SeoFields, Page):
 class BlogPage(SeoFields, Page):
     date = models.DateField("Post date")
     body = RichTextField()
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
@@ -52,7 +45,6 @@ class BlogPage(SeoFields, Page):
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('body'),
-        FieldPanel('feed_image'),
     ]
 
     parent_page_types = ['blog.BlogIndexPage']

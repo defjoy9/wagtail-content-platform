@@ -1,6 +1,6 @@
 <!-- blog/templates/blog/blog_index.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags blog_tags %}
 {% load static %}
 
 {% block extra_css %}
@@ -10,37 +10,46 @@
 {% block content %}
 <div class="container blog-index mt-xl">
 
-    <h1 class="blog-index-title">{{ page.title }}</h1>
+    <header class="blog-header">
+        <h1 class="blog-index-title">{{ page.title }}</h1>
+        {% if page.meta_description %}
+        <p class="blog-subtitle">{{ page.meta_description }}</p>
+        {% endif %}
+    </header>
 
     {% if posts %}
-    <div class="blog-grid">
+    <div class="blog-list">
         {% for post in posts %}
-        <article class="blog-card">
-            <a href="{{ post.url }}" class="card-image-wrapper">
-                {% if post.feed_image %}
-                    {% image post.feed_image fill-600x400 as cardimg %}
-                    <img src="{{ cardimg.url }}" alt="{{ post.title }}">
-                {% endif %}
-            </a>
-
-            <div class="card-content">
-                <h2 class="card-title">
-                    <a href="{{ post.url }}">{{ post.title }}</a>
-                </h2>
-
-                <p class="card-date">{{ post.date }}</p>
-
-                <p class="card-excerpt">
-                    {{ post.body|richtext|truncatewords:30 }}
-                </p>
-
-                <a href="{{ post.url }}" class="card-readmore">Read</a>
+        <article class="blog-list-item">
+            <div class="post-meta">
+                <time class="post-date" datetime="{{ post.date|date:'Y-m-d' }}">
+                    {{ post.date|date:"M d, Y" }}
+                </time>
+                <span class="post-divider">•</span>
+                <span class="post-reading-time">{{ post.body|wordcount|reading_time }} min read</span>
             </div>
+            
+            <h2 class="post-title">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+            </h2>
+            
+            <p class="post-excerpt">
+                {{ post.body|striptags|truncatewords:35 }}
+            </p>
+            
+            <a href="{{ post.url }}" class="post-link">
+                Read article
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
         </article>
         {% endfor %}
     </div>
     {% else %}
-        <p>No blog posts found.</p>
+        <div class="empty-state">
+            <p>No blog posts published yet. Check back soon!</p>
+        </div>
     {% endif %}
 
     {% if posts.paginator.num_pages > 1 %}

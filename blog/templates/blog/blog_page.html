@@ -1,6 +1,6 @@
 <!-- blog/templates/blog/blog_page.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags blog_tags %}
 {% load static %}
 
 {% block extra_css %}
@@ -8,27 +8,50 @@
 {% endblock %}
 
 {% block content %}
-<div class="container blog-article mt-xl">
+<article class="blog-article">
+    <div class="container-narrow mt-xl">
+        
+        <header class="article-header">
+            <div class="article-meta-top">
+                <time class="article-date" datetime="{{ page.date|date:'Y-m-d' }}">
+                    {{ page.date|date:"F d, Y" }}
+                </time>
+                <span class="meta-divider">•</span>
+                <span class="article-reading-time">{{ page.body|wordcount|reading_time }} min read</span>
+            </div>
+            
+            <h1 class="article-title">{{ page.title }}</h1>
+            
+            {% if page.meta_description %}
+            <p class="article-intro">{{ page.meta_description }}</p>
+            {% endif %}
+        </header>
 
-    <header class="article-header">
-        <h1 class="article-title">{{ page.title }}</h1>
-        <div class="article-meta">
-            <time class="article-date">{{ page.date }}</time>
+        <div class="article-content rich-text">
+            {{ page.body|richtext }}
         </div>
-    </header>
+        
+        <footer class="article-footer">
+            <div class="article-footer-meta">
+                <span class="footer-label">Published</span>
+                <time datetime="{{ page.date|date:'Y-m-d' }}">{{ page.date|date:"F d, Y" }}</time>
+                {% if page.last_published_at and page.last_published_at.date != page.date %}
+                <span class="meta-divider">•</span>
+                <span class="footer-label">Updated</span>
+                <time datetime="{{ page.last_published_at|date:'Y-m-d' }}">{{ page.last_published_at|date:"F d, Y" }}</time>
+                {% endif %}
+            </div>
+            
+            <div class="article-footer-actions">
+                <a href="{{ page.get_parent.url }}" class="back-link">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to all posts
+                </a>
+            </div>
+        </footer>
 
-    {% if page.feed_image %}
-    <div class="article-hero">
-        {% image page.feed_image fill-1200x500 as hero %}
-        <img src="{{ hero.url }}" alt="{{ page.title }}">
     </div>
-    {% endif %}
-
-    <div class="rich-text">
-        {{ page.body|richtext }}
-    </div>
-
-    <a href="{{ page.get_parent.url }}" class="back-link">Back to Blog</a>
-
-</div>
+</article>
 {% endblock %}
