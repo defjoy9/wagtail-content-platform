@@ -31,4 +31,7 @@ telepath==0.3.1
 typing_extensions==4.15.0
 urllib3==2.5.0
 wagtail==7.2
+wagtail-markdown==0.13.0
+Markdown==3.7
+Pygments==2.19.1
 Willow==1.12.0

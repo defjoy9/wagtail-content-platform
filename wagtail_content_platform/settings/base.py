@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "dashboard",
 
     "rest_framework",
+    "wagtailmarkdown",
 
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -119,3 +120,27 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 WAGTAILADMIN_BASE_URL = "https://defjoy.site"
+
+# -------------------------------------------------------------------
+# MARKDOWN CONFIGURATION
+# -------------------------------------------------------------------
+
+WAGTAILMARKDOWN = {
+    "autodownload_fontawesome": False,
+    "allowed_tags": [],  # Disable bleach tag filtering (allow all markdown-generated HTML)
+    "allowed_attributes": {},
+    "allowed_styles": [],
+    "allowed_settings_mode": "extend",
+    "extensions": [
+        "markdown.extensions.fenced_code",
+        "markdown.extensions.codehilite",
+        "markdown.extensions.tables",
+        "markdown.extensions.nl2br",
+    ],
+    "extension_configs": {
+        "markdown.extensions.codehilite": {
+            "css_class": "highlight",
+            "linenums": False,
+        }
+    },
+}

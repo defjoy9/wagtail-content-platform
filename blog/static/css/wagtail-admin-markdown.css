@@ -1,0 +1,227 @@
+/* Enhanced Markdown Editor Styling for Wagtail Admin */
+
+.EasyMDEContainer .editor-toolbar {
+    background: #f5f5f5;
+    border: 1px solid #d1d5db;
+    border-bottom: none;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.EasyMDEContainer .editor-toolbar button {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #374151;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+}
+
+.EasyMDEContainer .editor-toolbar button:hover {
+    background: #e0f2fe;
+    border-color: #0ea5e9;
+    color: #0c4a6e;
+}
+
+.EasyMDEContainer .editor-toolbar button:hover i::before {
+    color: #0c4a6e;
+}
+
+.EasyMDEContainer .editor-toolbar button.active {
+    background: #38ff88;
+    border-color: #38ff88;
+    color: #0a0a0a;
+}
+
+.EasyMDEContainer .editor-toolbar button.active i::before {
+    color: #0a0a0a;
+}
+
+.EasyMDEContainer .editor-toolbar i {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-style: normal !important;
+    font-weight: normal !important;
+}
+
+.EasyMDEContainer .editor-toolbar i.fa::before,
+.EasyMDEContainer .editor-toolbar i.fas::before {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+}
+
+.EasyMDEContainer .editor-toolbar .fa-bold::before { 
+    content: "B" !important; 
+    font-weight: bold !important; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-italic::before { 
+    content: "I" !important; 
+    font-style: italic !important; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-strikethrough::before { 
+    content: "S" !important; 
+    text-decoration: line-through; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-header::before,
+.EasyMDEContainer .editor-toolbar .fa-heading::before { 
+    content: "H" !important; 
+    font-weight: bold !important; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-quote-left::before { 
+    content: "❝"; 
+    font-size: 20px; 
+}
+.EasyMDEContainer .editor-toolbar .fa-quote-right::before { 
+    content: "❞"; 
+    font-size: 20px; 
+}
+.EasyMDEContainer .editor-toolbar .fa-list-ul::before { 
+    content: "•"; 
+    font-size: 20px; 
+}
+.EasyMDEContainer .editor-toolbar .fa-list-ol::before { 
+    content: "1."; 
+    font-size: 14px;
+}
+.EasyMDEContainer .editor-toolbar .fa-link::before { 
+    content: "🔗"; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-picture-o::before,
+.EasyMDEContainer .editor-toolbar .fa-image::before { 
+    content: "🖼"; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-code::before { 
+    content: "<>"; 
+    font-family: monospace; 
+    font-size: 14px;
+}
+.EasyMDEContainer .editor-toolbar .fa-table::before { 
+    content: "⊞"; 
+    font-size: 18px;
+}
+.EasyMDEContainer .editor-toolbar .fa-undo::before { 
+    content: "↶"; 
+    font-size: 18px;
+}
+.EasyMDEContainer .editor-toolbar .fa-repeat::before,
+.EasyMDEContainer .editor-toolbar .fa-redo::before { 
+    content: "↷"; 
+    font-size: 18px;
+}
+.EasyMDEContainer .editor-toolbar .fa-eye::before { 
+    content: "👁"; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-columns::before { 
+    content: "⫿"; 
+    font-size: 18px;
+}
+.EasyMDEContainer .editor-toolbar .fa-arrows-alt::before { 
+    content: "⛶"; 
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-question-circle::before { 
+    content: "?"; 
+    font-weight: bold;
+    font-size: 16px;
+}
+.EasyMDEContainer .editor-toolbar .fa-minus::before { 
+    content: "—"; 
+    font-size: 18px;
+}
+.EasyMDEContainer .editor-toolbar .fa-compress::before { 
+    content: "⇱"; 
+    font-size: 16px;
+}
+
+/* Separator styling */
+.EasyMDEContainer .editor-toolbar i.separator {
+    border-left: 1px solid #d1d5db;
+    margin: 0 4px;
+    width: 1px;
+    height: 24px;
+    display: inline-block;
+}
+
+/* Editor textarea styling */
+.EasyMDEContainer .CodeMirror {
+    border: 1px solid #d1d5db;
+    border-radius: 0 0 4px 4px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 400px;
+}
+
+.EasyMDEContainer .CodeMirror-scroll {
+    min-height: 400px;
+}
+
+/* Preview styling */
+.EasyMDEContainer .editor-preview,
+.EasyMDEContainer .editor-preview-side {
+    background: #ffffff;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.EasyMDEContainer .editor-preview pre,
+.EasyMDEContainer .editor-preview-side pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.EasyMDEContainer .editor-preview code,
+.EasyMDEContainer .editor-preview-side code {
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    color: #e11d48;
+}
+
+/* Status bar styling */
+.EasyMDEContainer .editor-statusbar {
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-top: none;
+    padding: 8px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Side-by-side mode */
+.EasyMDEContainer.sided .CodeMirror {
+    border-right: 1px solid #d1d5db;
+}
+
+/* Fullscreen mode */
+.EasyMDEContainer.fullscreen {
+    z-index: 99999;
+}
+
+.EasyMDEContainer.fullscreen .CodeMirror {
+    min-height: calc(100vh - 100px);
+}

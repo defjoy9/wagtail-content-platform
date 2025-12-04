@@ -1,6 +1,6 @@
 <!-- blog/templates/blog/blog_index.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags blog_tags %}
+{% load wagtailcore_tags wagtailimages_tags blog_tags wagtailmarkdown %}
 {% load static %}
 
 {% block extra_css %}
@@ -34,7 +34,7 @@
             </h2>
             
             <p class="post-excerpt">
-                {{ post.body|striptags|truncatewords:35 }}
+                {{ post.body|markdown|striptags|truncatewords:35 }}
             </p>
             
             <a href="{{ post.url }}" class="post-link">

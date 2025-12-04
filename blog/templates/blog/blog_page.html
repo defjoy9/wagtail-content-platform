@@ -1,10 +1,14 @@
 <!-- blog/templates/blog/blog_page.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags blog_tags %}
+{% load wagtailcore_tags wagtailimages_tags blog_tags wagtailmarkdown %}
 {% load static %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/code-copy.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -27,8 +31,8 @@
             {% endif %}
         </header>
 
-        <div class="article-content rich-text">
-            {{ page.body|richtext }}
+        <div class="article-content rich-text markdown-content">
+            {{ page.body|markdown }}
         </div>
         
         <footer class="article-footer">

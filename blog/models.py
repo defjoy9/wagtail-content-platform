@@ -1,10 +1,10 @@
 from django.db import models
 
 from wagtail.models import Page
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 from django.core.paginator import Paginator
+from wagtailmarkdown.fields import MarkdownField
 from home.models import SeoFields
 
 
@@ -35,7 +35,7 @@ class BlogIndexPage(SeoFields, Page):
 
 class BlogPage(SeoFields, Page):
     date = models.DateField("Post date")
-    body = RichTextField()
+    body = MarkdownField()
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
