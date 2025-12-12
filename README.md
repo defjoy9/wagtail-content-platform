@@ -1,166 +1,248 @@
 # Wagtail Content Platform
 
-A production-ready content management system built with Django and Wagtail CMS, demonstrating modern web development practices, RESTful API design, and containerized deployment infrastructure.
+A content management and publishing system I built using **Django**, **Wagtail**, **DRF**, **PostgreSQL**, **Docker**, and **Nginx**.
+This project represents how I approach backend development—from structuring the architecture to deploying it on a real server.
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![Django](https://img.shields.io/badge/Django-5.2-green.svg)](https://www.djangoproject.com/)
-[![Wagtail](https://img.shields.io/badge/Wagtail-7.2-teal.svg)](https://wagtail.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+**Live demo:** [https://defjoy.site](https://defjoy.site)
 
-**Live Demo:** [defjoy.site](https://defjoy.site)
-
----
-
-## 🎯 Overview
-
-This platform is a full-featured CMS designed for technical content publishing, showcasing enterprise-level Django/Wagtail development with emphasis on:
-
-- **Content Management**: Hierarchical page structures with custom page types and rich text editing
-- **REST API**: Django REST Framework endpoints for headless CMS capabilities
-- **Authentication**: User registration, role-based permissions, and staff dashboards
-- **Production Infrastructure**: Docker containerization, Nginx reverse proxy, PostgreSQL database
-- **Developer Experience**: Markdown support with syntax highlighting, SEO optimization, and comprehensive admin tools
+![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
+![Django](https://img.shields.io/badge/Django-5.2-green.svg)
+![Wagtail](https://img.shields.io/badge/Wagtail-7.2-teal.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ---
 
-## ✨ Key Features
+# 1. Why I Built This
 
-### Content Management
-- **Wagtail CMS Integration**: Hierarchical page models with draft/publish workflows
-- **Custom Page Types**: Blog posts, standard pages, about pages with SEO fields
-- **Markdown Support**: Full markdown editing with syntax-highlighted code blocks
-- **Media Management**: Image uploads with automatic optimization
-- **Search Functionality**: Full-text search across all content
+I created this project as a realistic backend portfolio piece.
+My goals were to:
 
-### REST API
-- **Django REST Framework**: JSON endpoints for content distribution
-- **List & Detail Views**: Paginated blog post listing and individual post retrieval
-- **Serializers**: Clean data representation with nested relationships
-- **Browsable API**: Interactive API documentation at `/api/posts/`
+* Build a flexible CMS with Wagtail and custom page types
+* Expose a clean REST API for headless use cases
+* Implement authentication, permissions, and dashboards
+* Deploy the platform using Docker, Nginx, Gunicorn, and PostgreSQL
+* Document the full process, including production deployment
 
-### Authentication & Authorization
-- **User Registration**: Custom signup with email validation
-- **Login System**: Session-based authentication
-- **Role-Based Access**: Staff-only dashboards and content management
-- **Profile Management**: User account settings
-
-### Admin & Dashboard
-- **Staff Dashboard**: Content statistics, time-series data, recent activity
-- **Wagtail Admin**: Enhanced with custom CSS for markdown editor visibility
-- **Content Analytics**: Post counts, publishing metrics, user engagement
-
-### Developer Features
-- **macOS Terminal Code Blocks**: Styled code blocks with copy-to-clipboard
-- **Reading Time Calculator**: Template tag for estimated reading duration
-- **Navigation Tags**: Reusable template tags for site navigation
-- **Environment-Based Settings**: Separate dev/production configurations
+This project helped me strengthen my understanding of **system design, operations, testing, and production environments**.
 
 ---
 
-## 🛠️ Tech Stack
+# 2. Architecture Overview
 
-### Backend
-- **Django 5.2** - Web framework with ORM, authentication, middleware
-- **Wagtail 7.2** - Enterprise CMS with hierarchical page models
-- **Django REST Framework 3.16** - RESTful API toolkit
-- **PostgreSQL** - Production database (SQLite for development)
-- **Gunicorn 20.0** - WSGI HTTP server
+```
+                Client
+                  │  HTTPS
+                  ▼
+            ┌────────────┐
+            │    Nginx   │ (reverse proxy + SSL + static/media)
+            └──────┬─────┘
+                   │
+              Gunicorn WSGI
+                   │
+                   ▼
+        ┌────────────────────────┐
+        │ Django + Wagtail App   │
+        └──────────┬─────────────┘
+                   │ ORM
+                   ▼
+            PostgreSQL Database
+```
 
-### Frontend
-- **Vanilla JavaScript** - No framework dependencies
-- **CSS3** - Custom styling with CSS variables and grid layouts
-- **Wagtail Templates** - Server-side rendering with Django template language
+### Why I structured it this way:
 
-### Infrastructure
-- **Docker** - Containerization for consistent environments
-- **Nginx** - Reverse proxy and static file serving
-- **Let's Encrypt** - Automated SSL/TLS certificates
-- **DigitalOcean** - Cloud hosting (Ubuntu 24.04 LTS)
-
-### Development Tools
-- **python-dotenv** - Environment variable management
-- **Markdown & Pygments** - Content formatting and syntax highlighting
-- **wagtail-markdown** - Markdown field support in Wagtail admin
-
----
-
-## 📋 Prerequisites
-
-- **Python 3.12+**
-- **PostgreSQL 14+** (for production)
-- **Docker & Docker Compose** (for containerized deployment)
-- **Git**
+* **Nginx** handles HTTPS, static/media, and request buffering
+* **Gunicorn** runs Django efficiently
+* **Docker** keeps dev and prod environments predictable
+* **PostgreSQL** is production-ready compared to SQLite
+* **Environment-based settings** keep configuration clean and secure
 
 ---
 
-## 🚀 Quick Start
+# 3. Key Features
 
-### Local Development Setup
+## Content & Page Management
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/defjoy9/wagtail-content-platform.git
-   cd wagtail-content-platform
-   ```
+* Custom Wagtail page models
+* Markdown support with syntax highlighting
+* SEO fields on key page types
+* Reading-time calculation
+* Template tags for navigation
 
-2. **Create virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+## REST API (DRF)
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+* Paginated post listing
+* Individual post retrieval
+* Serializer-based content shaping
+* Browsable API UI
 
-4. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
+## Authentication & Permissions
 
-5. **Run migrations**
-   ```bash
-   python manage.py migrate
-   ```
+* User signup and login
+* Staff-only dashboard
+* Role-based access
 
-6. **Create superuser**
-   ```bash
-   python manage.py createsuperuser
-   ```
+## Staff Dashboard
 
-7. **Collect static files**
-   ```bash
-   python manage.py collectstatic --noinput
-   ```
+* Content statistics
+* Post publishing analytics
+* Recent activity overview
 
-8. **Run development server**
-   ```bash
-   python manage.py runserver
-   ```
+## Infrastructure & Deployment
 
-9. **Access the application**
-   - **Frontend**: http://localhost:8000
-   - **REST API**: http://localhost:8000/api/posts/
+* Dockerized multi-service environment
+* Nginx reverse proxy
+* Gunicorn for application serving
+* PostgreSQL with persistent storage
+* Environment-based production configuration
+* HTTPS via Let’s Encrypt
 
 ---
 
-### Complete Production Setup
+# 4. Design Decisions
 
-For a comprehensive production deployment guide including:
-- DNS configuration (Namecheap)
-- DigitalOcean droplet setup
-- PostgreSQL database configuration
-- Nginx reverse proxy with SSL
-- Docker networking and volumes
-- Troubleshooting common issues
+### Why Wagtail?
 
-**See:** [Complete Production Deployment Guide](blog-posts/05-complete-deployment-guide.md)
+I wanted a CMS that lets me define structured page types while still giving me a powerful admin UI without writing it myself.
+
+### Why DRF?
+
+I wanted the content to be reusable for possible headless or external consumers.
+
+### Why Docker?
+
+I wanted identical environments for dev and production and a clear separation of services.
+
+### Why Nginx + Gunicorn?
+
+This is a standard, reliable Python production stack I wanted to gain real experience with.
 
 ---
 
-## 📁 Project Structure
+# 5. Security Considerations
+
+* HTTPS via Let’s Encrypt
+* Strict `ALLOWED_HOSTS` in production
+* CSRF protection via Django middleware
+* Sanitized rich text from Wagtail
+* Secure cookie settings in production
+* Django-managed password hashing
+
+---
+
+# 6. Performance Considerations
+
+* Static/media served by Nginx
+* Pagination on API endpoints
+* Prefetch/select_related on expensive queries
+* Wagtail image renditions for optimized images
+* GZip compression enabled in Nginx
+
+---
+
+# 7. Local Development Setup
+
+```bash
+git clone https://github.com/defjoy9/wagtail-content-platform.git
+cd wagtail-content-platform
+
+python -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+cp .env.example .env
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+Access locally:
+
+* [http://localhost:8000](http://localhost:8000)
+* [http://localhost:8000/admin](http://localhost:8000/admin)
+* [http://localhost:8000/api/posts/](http://localhost:8000/api/posts/)
+
+---
+
+# 8. Environment Configuration
+
+Create a `.env` file:
+
+```env
+# Django
+DJANGO_SECRET_KEY=
+DJANGO_SETTINGS_MODULE=wagtail_content_platform.settings.dev
+
+# Database
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+```
+
+## Switching Environments
+
+**Development:**
+
+```bash
+export DJANGO_SETTINGS_MODULE=wagtail_content_platform.settings.dev
+```
+
+**Production:**
+
+```bash
+export DJANGO_SETTINGS_MODULE=wagtail_content_platform.settings.production
+```
+
+---
+
+# 9. Production Deployment (with Docker)
+
+I documented my full deployment process—including DNS, Nginx, SSL, Docker networking, and troubleshooting—in my blog:
+
+**Full deployment guide:**
+[https://defjoy.site/blog/complete-deployment-guide/](https://defjoy.site/blog/complete-deployment-guide/)
+
+Start production services:
+
+```bash
+docker compose up -d --build
+```
+
+This runs:
+
+* Nginx
+* Django + Gunicorn
+* PostgreSQL
+
+---
+
+# 10. API Documentation
+
+### List Posts
+
+```
+GET /api/posts/
+```
+
+### Post Detail
+
+```
+GET /api/posts/{id}/
+```
+
+### Example error response
+
+```json
+{ "detail": "Not found." }
+```
+
+Pagination is enabled by default.
+
+---
+
+# 11. Project Structure
 
 ```
 wagtail-content-platform/
@@ -203,176 +285,39 @@ wagtail-content-platform/
 
 ---
 
-## 🔧 Configuration
+# 12. Management Commands
 
-### Environment Variables
+### Create Homepage
 
-Create a `.env` file in the project root:
-
-```env
-# Django/Wagtail
-DJANGO_SECRET_KEY=
-DJANGO_SETTINGS_MODULE=w
-
-# PostgreSQL
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-DB_HOST=
-DB_PORT=
-```
-
-### Development vs Production
-
-- **Development**: Uses `dev.py` settings with SQLite, DEBUG=True, and local static files
-- **Production**: Uses `production.py` settings with PostgreSQL, DEBUG=False, and collected static files
-
-Switch between environments:
-```bash
-# Development
-export DJANGO_SETTINGS_MODULE=wagtail_content_platform.settings.dev
-
-# Production
-export DJANGO_SETTINGS_MODULE=wagtail_content_platform.settings.production
-```
-
----
-
-## 📚 API Documentation
-
-### Endpoints
-
-#### List All Blog Posts
-```http
-GET /api/posts/
-```
-
-**Response:**
-```json
-{
-  "count": 10,
-  "next": "http://localhost:8000/api/posts/?page=2",
-  "previous": null,
-  "results": [
-    {
-      "id": 1,
-      "title": "Getting Started with Wagtail",
-      "slug": "getting-started-with-wagtail",
-      "date": "2024-12-01",
-      "body": "Content here...",
-      "url": "/blog/getting-started-with-wagtail/"
-    }
-  ]
-}
-```
-
-#### Get Single Blog Post
-```http
-GET /api/posts/{id}/
-```
-
-**Response:**
-```json
-{
-  "id": 1,
-  "title": "Getting Started with Wagtail",
-  "slug": "getting-started-with-wagtail",
-  "date": "2024-12-01",
-  "body": "Full content...",
-  "url": "/blog/getting-started-with-wagtail/",
-  "meta_title": "Getting Started with Wagtail - Wagtail CMS",
-  "meta_description": "Learn the basics of Wagtail CMS..."
-}
-```
-
-## 📝 Management Commands
-
-### Create Homepage (if not exists)
 ```bash
 python manage.py create_homepage
 ```
 
 ### Sync Navigation Pages
+
 ```bash
 python manage.py sync_nav
 ```
-Creates required site pages (About, Blog Index) if they don't exist under HomePage.
 
-### Collect Static Files
+### Static Collection
+
 ```bash
 python manage.py collectstatic --noinput
 ```
 
-### Database Operations
-```bash
-# Create migrations
-python manage.py makemigrations
+---
 
-# Apply migrations
-python manage.py migrate
+# 13. Future Improvements
 
-# Show migration status
-python manage.py showmigrations
-```
+* Token-based API authentication
+* API versioning
+* Comment system
+* Redis caching
+* Celery background tasks
+* More dashboard analytics
 
 ---
 
-## 🎨 Customization
+# 14. License
 
-### Adding New Page Types
-
-1. Create model in `home/models.py` or `blog/models.py`:
-   ```python
-   from wagtail.models import Page
-   from wagtail.fields import RichTextField
-   from wagtail.admin.panels import FieldPanel
-
-   class CustomPage(Page):
-       body = RichTextField()
-       
-       content_panels = Page.content_panels + [
-           FieldPanel('body'),
-       ]
-   ```
-
-2. Create template in `templates/app_name/custom_page.html`
-
-3. Run migrations:
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
-
-### Custom Template Tags
-
-Create reusable template tags in `templatetags/` directory:
-```python
-from django import template
-
-register = template.Library()
-
-@register.simple_tag
-def custom_tag(value):
-    return f"Processed: {value}"
-```
-
----
-
-## 🚦 Deployment Checklist
-
-- [ ] Set `DEBUG = False` in production settings
-- [ ] Configure `ALLOWED_HOSTS` with your domain
-- [ ] Set strong `SECRET_KEY`
-- [ ] Configure PostgreSQL database
-- [ ] Run `collectstatic` for static files
-- [ ] Set up Nginx reverse proxy
-- [ ] Configure SSL certificates (Let's Encrypt)
-- [ ] Set up database backups
-- [ ] Configure logging and monitoring
-- [ ] Test all functionality in production environment
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+MIT License.
